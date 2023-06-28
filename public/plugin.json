@@ -1,0 +1,35 @@
+{
+  "preload": "preload.js",
+  "logo": "logo.png",
+  "platform": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "pluginSetting": {
+    "single": true
+  },
+  "features": [
+    {
+      "code": "translate",
+      "explain": "翻译文本",
+      "cmds": [
+        "翻译",
+        {
+          "type": "over",
+          "label": "翻译文本",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      ]
+    },
+    {
+      "code": "setting",
+      "explain": "设置",
+      "cmds": [
+        "设置",
+        "setting"
+      ]
+    }
+  ]
+}

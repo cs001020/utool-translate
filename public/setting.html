@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置</title>
+</head>
+<body>
+有道翻译appId设置:<input type="text" id="id"><br>
+有道翻译secret设置:<input type="password" id="key"><br>
+防抖延迟ms:<input type="number" id="debounce" placeholder="默认500ms"><span
+        style="color: red">建议不低于300，过低可能导致频繁调用api</span><br>
+历史记录数量:<input type="number" id="historyListSize" placeholder="默认12条"><span
+        style="color: red">低于之前设定将会删除多余记录</span><br>
+<button onclick="setting()">确定</button>
+<script>
+
+    /*api设置*/
+    const id = document.getElementById("id")
+    const key = document.getElementById("key")
+    id.value = utools.dbStorage.getItem("id")
+    key.value = utools.dbStorage.getItem("key")
+    /*防抖设置*/
+    const debounce = document.getElementById("debounce")
+    const debounceTime = utools.dbStorage.getItem("debounce_time")
+    if (debounceTime) {
+        debounce.value = parseInt(debounceTime)
+    }
+
+    /*历史长度设置*/
+    const maxsize = document.getElementById("historyListSize")
+    const historyListSize = utools.dbStorage.getItem("history_list_size")
+    if (historyListSize) {
+        maxsize.value = parseInt(historyListSize)
+    }
+
+    function setting() {
+        utools.dbStorage.setItem("id", id.value)
+        utools.dbStorage.setItem("key", key.value)
+        if (debounce.value !== '') {
+            if (debounce.value <= 0) {
+                alert("别写负数")
+                return
+            }
+            utools.dbStorage.setItem("debounce_time", debounce.value)
+        }else {
+            utools.dbStorage.removeItem("debounce_time")
+        }
+        if (maxsize.value !== '') {
+            if (maxsize.value <= 0) {
+                alert("别写负数")
+                return
+            }
+            utools.dbStorage.setItem("history_list_size", maxsize.value)
+        }else {
+            utools.dbStorage.removeItem("history_list_size")
+        }
+        alert("设置成功，自己关掉窗口，我不会")
+    }
+
+</script>
+</body>
+</html>
