@@ -4,7 +4,7 @@ const outputPath = path.resolve(__dirname, "./dist")
 
 
 module.exports = {
-    mode: 'development',//生产模式
+    mode: 'production',//生产模式
     entry: './src/preload.ts',//入口文件地址
     output: {
         path: outputPath,//出口文件，即打包后的文件存放地址
